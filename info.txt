@@ -1,0 +1,11 @@
+SQLite DB Create Statement
+
+CREATE TABLE `entries` (
+	`UUID`	TEXT,
+	`title`	TEXT,
+	`text`	TEXT,
+	`date`	TEXT,
+	`imgLink`	TEXT,
+	`feeling`	INTEGER,
+	PRIMARY KEY(`UUID`)
+);
