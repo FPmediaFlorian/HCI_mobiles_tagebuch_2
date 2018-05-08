@@ -9,3 +9,4 @@ CREATE TABLE `entries` (
 	`feeling`	INTEGER,
 	PRIMARY KEY(`UUID`)
 );
+d
