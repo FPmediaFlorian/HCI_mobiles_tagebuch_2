@@ -1,12 +1,15 @@
-SQLite DB Create Statement
+SQLite Database creation in DiaryDbHandler class:
 
-CREATE TABLE `entries` (
-	`UUID`	TEXT,
-	`title`	TEXT,
-	`text`	TEXT,
-	`date`	TEXT,
-	`imgLink`	TEXT,
-	`feeling`	INTEGER,
-	PRIMARY KEY(`UUID`)
-);
-d
+private static final String DB_NAME = "diary.dp";
+    private static final int DB_VERSION = 1;
+    private static final String TABLE_NAME = "entries";
+    private static final String ID = "uuid";
+    private static final String TITLE = "title";
+    private static final String TEXT = "text";
+    private static final String DATE = "date";
+    private static final String IMG_LINK = "imgLink";
+    private static final String FEELING = "feeling";
+
+private static final String CREATE_ENTRIES_TABLE = "CREATE TABLE " + TABLE_NAME + " (" + ID +
+            " INTEGER PRIMARY KEY AUTOINCREMENT, " + TITLE + " TEXT, " + TEXT + " TEXT, " + DATE +
+            " DATE, " + IMG_LINK + " TEXT, " + FEELING + " INTEGER);";
