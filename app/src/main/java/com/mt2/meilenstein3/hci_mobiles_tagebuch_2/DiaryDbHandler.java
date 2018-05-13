@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.provider.ContactsContract;
 import android.util.Log;
 
 public class DiaryDbHandler extends SQLiteOpenHelper {
@@ -66,7 +67,7 @@ public class DiaryDbHandler extends SQLiteOpenHelper {
             ContentValues contentVals = new ContentValues();
 
             Log.w(TAG, "Database Path: " + database.getPath());
-            contentVals.put(TITLE, title );
+            contentVals.put(TITLE, title);
             contentVals.put(TEXT, text);
             contentVals.put(DATE, date);
             contentVals.put(IMG_LINK, imgLink);
@@ -80,7 +81,109 @@ public class DiaryDbHandler extends SQLiteOpenHelper {
              * log something... :)
              * currently logging ID of inserted Row
              */
-            Log.d(TAG, "Function insert() executed. Id of inserted Row = " + insertedRowId);
+            Log.d(TAG, "Function insert() executed. ID of inserted Row = " + insertedRowId);
+        }
+    }
+
+    public void changeTitle(long uuid, String title) {
+        /*
+         * Log Row ID of inserted Row
+         * In case of Error: return value = -1
+         */
+        long insertedRowId = -1;
+
+        try {
+            SQLiteDatabase database = getWritableDatabase();
+            ContentValues contentVal = new ContentValues();
+
+            Log.w(TAG, "Database Path: " + database.getPath());
+            contentVal.put(TITLE, title);
+
+            insertedRowId = database.update(TABLE_NAME, contentVal, ID + " = ?",
+                    new String[]{Long.toString(uuid)});
+        } catch (SQLException e) {
+            Log.e(TAG, "Error at changeTitle() function", e);
+        } finally {
+            Log.d(TAG, "Function changeTitle() executed. ID of inserted Row = " + insertedRowId + " New Title: " + title);
+        }
+    }
+
+    public void changeText(long uuid, String text) {
+        /*
+         * Log Row ID of inserted Row
+         * In case of Error: return value = -1
+         */
+        long insertedRowId = -1;
+
+        try {
+            SQLiteDatabase database = getWritableDatabase();
+            ContentValues contentVal = new ContentValues();
+
+            Log.w(TAG, "Database Path: " + database.getPath());
+            contentVal.put(TEXT, text);
+
+            insertedRowId = database.update(TABLE_NAME, contentVal, ID + " = ?",
+                    new String[]{Long.toString(uuid)});
+        } catch (SQLException e) {
+            Log.e(TAG, "Error at changeText() function", e);
+        } finally {
+            Log.d(TAG, "Function changeText() executed. ID of inserted Row = " + insertedRowId);
+        }
+    }
+
+    public void changeDate(long uuid, String date) {
+        /*
+         * Log Row ID of inserted Row
+         * In case of Error: return value = -1
+         */
+        long insertedRowId = -1;
+
+        try {
+            SQLiteDatabase database = getWritableDatabase();
+            ContentValues contentVal = new ContentValues();
+
+            Log.w(TAG, "Database Path: " + database.getPath());
+            contentVal.put(DATE, date);
+
+            insertedRowId = database.update(TABLE_NAME, contentVal, ID + " = ?",
+                    new String[]{Long.toString(uuid)});
+        } catch (SQLException e) {
+            Log.e(TAG, "Error at changeDate() function", e);
+        } finally {
+            Log.d(TAG, "Function changeDate() executed. ID of inserted Row = " + insertedRowId);
+        }
+    }
+
+    public void changeImgLink(long uuid, String imgLink){
+        /*
+         * Log Row ID of inserted Row
+         * In case of Error: return value = -1
+         */
+        long insertedRowId = -1;
+
+        try {
+            SQLiteDatabase database = getWritableDatabase();
+            ContentValues contentVal = new ContentValues();
+
+            Log.w(TAG, "Database Path: " + database.getPath());
+            contentVal.put(IMG_LINK, imgLink);
+
+            insertedRowId = database.update(TABLE_NAME, contentVal, ID + " = ?",
+                    new String[]{Long.toString(uuid)});
+        } catch (SQLException e) {
+            Log.e(TAG, "Error at changeImgLink() function", e);
+        } finally {
+            Log.d(TAG, "Function changeImgLink() executed. ID of inserted Row = " + insertedRowId);
+        }
+    }
+    public void deleteEntry(long uuid) {
+        SQLiteDatabase database = getWritableDatabase();
+        int deletedRow = database.delete(TABLE_NAME, ID + " = ?",
+                                            new String[] {Long.toString(uuid)});
+        if(deletedRow == 0){
+            Log.d(TAG, "Function deleteEntry() executed. Couldn't find specified row entry!");
+        } else {
+            Log.d(TAG, "Function deleteEntry() executed. ID of deleted Row = " + uuid);
         }
     }
 }
