@@ -1,0 +1,15 @@
+SQLite Database creation in DiaryDbHandler class:
+
+private static final String DB_NAME = "diary.dp";
+    private static final int DB_VERSION = 1;
+    private static final String TABLE_NAME = "entries";
+    private static final String ID = "uuid";
+    private static final String TITLE = "title";
+    private static final String TEXT = "text";
+    private static final String DATE = "date";
+    private static final String IMG_LINK = "imgLink";
+    private static final String FEELING = "feeling";
+
+private static final String CREATE_ENTRIES_TABLE = "CREATE TABLE " + TABLE_NAME + " (" + ID +
+            " INTEGER PRIMARY KEY AUTOINCREMENT, " + TITLE + " TEXT, " + TEXT + " TEXT, " + DATE +
+            " DATE, " + IMG_LINK + " TEXT, " + FEELING + " INTEGER);";
