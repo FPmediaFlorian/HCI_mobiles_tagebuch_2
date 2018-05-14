@@ -9,7 +9,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,12 +27,17 @@ public class MainActivity extends AppCompatActivity {
         //setSupportActionBar(toolbar);
         diaryDbHandler = new DiaryDbHandler(this);
         diaryDbAdapter = new DiaryDbAdapter(this);
-        entryListView = findViewById(R.id.listview_test);
+        entryListView = findViewById(R.id.listview);
 
         entryListView.setAdapter(diaryDbAdapter);
         updateListView();
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+
+
+
+
+
+        FloatingActionButton fab =  findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
