@@ -9,8 +9,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
 
 public class MainActivity extends AppCompatActivity {
+
+    private DiaryDbHandler diaryDbHandler;
+    private DiaryDbAdapter diaryDbAdapter;
+    private ListView entryListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +23,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
+        diaryDbHandler = new DiaryDbHandler(this);
+        diaryDbAdapter = new DiaryDbAdapter(this);
+        entryListView = findViewById(R.id.listview_test);
+
+        entryListView.setAdapter(diaryDbAdapter);
+        updateListView();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -50,5 +61,21 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void updateListView(){
+        diaryDbAdapter.changeCursor(diaryDbHandler.queryEntries());
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        updateListView();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        diaryDbHandler.close();
     }
 }

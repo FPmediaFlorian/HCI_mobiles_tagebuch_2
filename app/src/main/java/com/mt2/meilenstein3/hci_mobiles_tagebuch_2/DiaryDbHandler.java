@@ -2,10 +2,10 @@ package com.mt2.meilenstein3.hci_mobiles_tagebuch_2;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.provider.ContactsContract;
 import android.util.Log;
 
 public class DiaryDbHandler extends SQLiteOpenHelper {
@@ -15,17 +15,37 @@ public class DiaryDbHandler extends SQLiteOpenHelper {
     private static final String DB_NAME = "diary.db";
     private static final int DB_VERSION = 1;
     private static final String TABLE_NAME = "entries";
-    private static final String ID = "uuid";
+    private static final String _id = "_id";
     private static final String TITLE = "title";
     private static final String TEXT = "text";
     private static final String DATE = "date";
     private static final String IMG_LINK = "imgLink";
     private static final String FEELING = "feeling";
 
+    public static String getID() {
+        return _id;
+    }
+
+    public static String getTITLE() {
+        return TITLE;
+    }
+
+    public static String getTEXT() {
+        return TEXT;
+    }
+
+    public static String getDATE() {
+        return DATE;
+    }
+
+    public static String getImgLink() {
+        return IMG_LINK;
+    }
+
     /*
-     * Create Table Entries
-     */
-    private static final String CREATE_ENTRIES_TABLE = "CREATE TABLE " + TABLE_NAME + " (" + ID +
+         * Create Table Entries
+         */
+    private static final String CREATE_ENTRIES_TABLE = "CREATE TABLE " + TABLE_NAME + " (" + _id +
             " INTEGER PRIMARY KEY AUTOINCREMENT, " + TITLE + " TEXT, " + TEXT + " TEXT, " + DATE +
             " TEXT, " + IMG_LINK + " TEXT, " + FEELING + " INTEGER);";
 
@@ -57,7 +77,7 @@ public class DiaryDbHandler extends SQLiteOpenHelper {
 
     public void insertEntry(String title, String text, String date, String imgLink, int feeling ) {
         /*
-         * Log Row ID of inserted Row
+         * Log Row _id of inserted Row
          * In case of Error: return value = -1
          */
         long insertedRowId = -1;
@@ -79,15 +99,15 @@ public class DiaryDbHandler extends SQLiteOpenHelper {
         } finally {
             /*
              * log something... :)
-             * currently logging ID of inserted Row
+             * currently logging _id of inserted Row
              */
-            Log.d(TAG, "Function insert() executed. ID of inserted Row = " + insertedRowId);
+            Log.d(TAG, "Function insert() executed. _id of inserted Row = " + insertedRowId);
         }
     }
 
     public void changeTitle(long uuid, String title) {
         /*
-         * Log Row ID of inserted Row
+         * Log Row _id of inserted Row
          * In case of Error: return value = -1
          */
         long insertedRowId = -1;
@@ -99,18 +119,18 @@ public class DiaryDbHandler extends SQLiteOpenHelper {
             Log.w(TAG, "Database Path: " + database.getPath());
             contentVal.put(TITLE, title);
 
-            insertedRowId = database.update(TABLE_NAME, contentVal, ID + " = ?",
+            insertedRowId = database.update(TABLE_NAME, contentVal, _id + " = ?",
                     new String[]{Long.toString(uuid)});
         } catch (SQLException e) {
             Log.e(TAG, "Error at changeTitle() function", e);
         } finally {
-            Log.d(TAG, "Function changeTitle() executed. ID of inserted Row = " + insertedRowId + " New Title: " + title);
+            Log.d(TAG, "Function changeTitle() executed. _id of inserted Row = " + insertedRowId + " New Title: " + title);
         }
     }
 
     public void changeText(long uuid, String text) {
         /*
-         * Log Row ID of inserted Row
+         * Log Row _id of inserted Row
          * In case of Error: return value = -1
          */
         long insertedRowId = -1;
@@ -122,18 +142,18 @@ public class DiaryDbHandler extends SQLiteOpenHelper {
             Log.w(TAG, "Database Path: " + database.getPath());
             contentVal.put(TEXT, text);
 
-            insertedRowId = database.update(TABLE_NAME, contentVal, ID + " = ?",
+            insertedRowId = database.update(TABLE_NAME, contentVal, _id + " = ?",
                     new String[]{Long.toString(uuid)});
         } catch (SQLException e) {
             Log.e(TAG, "Error at changeText() function", e);
         } finally {
-            Log.d(TAG, "Function changeText() executed. ID of inserted Row = " + insertedRowId);
+            Log.d(TAG, "Function changeText() executed. _id of inserted Row = " + insertedRowId);
         }
     }
 
     public void changeDate(long uuid, String date) {
         /*
-         * Log Row ID of inserted Row
+         * Log Row _id of inserted Row
          * In case of Error: return value = -1
          */
         long insertedRowId = -1;
@@ -145,18 +165,18 @@ public class DiaryDbHandler extends SQLiteOpenHelper {
             Log.w(TAG, "Database Path: " + database.getPath());
             contentVal.put(DATE, date);
 
-            insertedRowId = database.update(TABLE_NAME, contentVal, ID + " = ?",
+            insertedRowId = database.update(TABLE_NAME, contentVal, _id + " = ?",
                     new String[]{Long.toString(uuid)});
         } catch (SQLException e) {
             Log.e(TAG, "Error at changeDate() function", e);
         } finally {
-            Log.d(TAG, "Function changeDate() executed. ID of inserted Row = " + insertedRowId);
+            Log.d(TAG, "Function changeDate() executed. _id of inserted Row = " + insertedRowId);
         }
     }
 
     public void changeImgLink(long uuid, String imgLink){
         /*
-         * Log Row ID of inserted Row
+         * Log Row _id of inserted Row
          * In case of Error: return value = -1
          */
         long insertedRowId = -1;
@@ -168,22 +188,28 @@ public class DiaryDbHandler extends SQLiteOpenHelper {
             Log.w(TAG, "Database Path: " + database.getPath());
             contentVal.put(IMG_LINK, imgLink);
 
-            insertedRowId = database.update(TABLE_NAME, contentVal, ID + " = ?",
+            insertedRowId = database.update(TABLE_NAME, contentVal, _id + " = ?",
                     new String[]{Long.toString(uuid)});
         } catch (SQLException e) {
             Log.e(TAG, "Error at changeImgLink() function", e);
         } finally {
-            Log.d(TAG, "Function changeImgLink() executed. ID of inserted Row = " + insertedRowId);
+            Log.d(TAG, "Function changeImgLink() executed. _id of inserted Row = " + insertedRowId);
         }
     }
     public void deleteEntry(long uuid) {
         SQLiteDatabase database = getWritableDatabase();
-        int deletedRow = database.delete(TABLE_NAME, ID + " = ?",
+        int deletedRow = database.delete(TABLE_NAME, _id + " = ?",
                                             new String[] {Long.toString(uuid)});
         if(deletedRow == 0){
             Log.d(TAG, "Function deleteEntry() executed. Couldn't find specified row entry!");
         } else {
-            Log.d(TAG, "Function deleteEntry() executed. ID of deleted Row = " + uuid);
+            Log.d(TAG, "Function deleteEntry() executed. _id of deleted Row = " + uuid);
         }
+    }
+
+    public Cursor queryEntries(){
+        SQLiteDatabase database = getWritableDatabase();
+        return database.query(TABLE_NAME, null, null, null,
+                null, null, _id + " DESC");
     }
 }
