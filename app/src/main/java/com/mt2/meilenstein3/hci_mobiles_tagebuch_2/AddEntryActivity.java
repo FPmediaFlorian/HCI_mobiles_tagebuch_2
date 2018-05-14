@@ -28,9 +28,25 @@ public class AddEntryActivity extends AppCompatActivity {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                diaryDbHandler.insertEntry("Test Title", "Test Text", "1-1-2018",
+                diaryDbHandler.insertEntry("Test Title No. 2", "Test Text", "1-1-2018",
                         "/test", 10);
             }
         });
+
+        final Button changeTitle = findViewById(R.id.change_title);
+        changeTitle.setOnClickListener((view) -> {
+            diaryDbHandler.changeTitle(1, "Changed Text Title");
+        });
+
+        final Button deleteEntry = findViewById(R.id.delete_entry);
+        deleteEntry.setOnClickListener((view) -> {
+            diaryDbHandler.deleteEntry(5);
+        });
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        diaryDbHandler.close();
     }
 }

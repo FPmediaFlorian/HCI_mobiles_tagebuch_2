@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://C:\Users\jakob\OneDrive\Uni\HCI\HCI_mobiles_tagebuch_2-dev-branch\HCI_mobiles_tagebuch_2.iml" filepath="C:\Users\jakob\OneDrive\Uni\HCI\HCI_mobiles_tagebuch_2-dev-branch\HCI_mobiles_tagebuch_2.iml" />
       <module fileurl="file://$PROJECT_DIR$/HCI_mobiles_tagebuch_2-dev-branch.iml" filepath="$PROJECT_DIR$/HCI_mobiles_tagebuch_2-dev-branch.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://C:\Users\jakob\OneDrive\Uni\HCI\HCI_mobiles_tagebuch_2-dev-branch\app\app.iml" filepath="C:\Users\jakob\OneDrive\Uni\HCI\HCI_mobiles_tagebuch_2-dev-branch\app\app.iml" />
     </modules>
   </component>
 </project>
