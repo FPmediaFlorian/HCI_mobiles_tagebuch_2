@@ -32,7 +32,30 @@ public class MainActivity extends AppCompatActivity {
         entryListView.setAdapter(diaryDbAdapter);
         updateListView();
 
+        entryListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+                //TODO:
+                //comment the following
+                Toast.makeText(MainActivity.this, "You clicked List Item with ID " + id,Toast.LENGTH_SHORT).show();
+
+                //Add activity Name & uncomment the following
+                /*
+                Intent i = new Intent(getApplicationContext(), ActivityName.class);
+                i.putExtra("id",id);
+                startActivity(i);
+                */
+
+                //Add code to new activity to get id
+                /*
+                Bundle extras = getIntent().getExtras();
+                if (extras != null) {
+                    long id = extras.getLong("id");
+                }
+                */
+            }
+        });
 
 
 
@@ -47,6 +70,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
