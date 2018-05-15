@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
                 //Add activity Name & uncomment the following
                 /*
                 Intent i = new Intent(getApplicationContext(), ActivityName.class);
-                i.putExtra("id",id);
+                i.putExtra("id",diaryDbAdapter.getItemId(position)); //id);
                 startActivity(i);
                 */
 
