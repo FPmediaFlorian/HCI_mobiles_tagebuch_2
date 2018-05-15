@@ -20,6 +20,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".AddEntryActivity"></activity>
+        <activity android:name=".EntryEdit"></activity>
+        <activity android:name=".ViewEntry"></activity>
     </application>
 
 </manifest>

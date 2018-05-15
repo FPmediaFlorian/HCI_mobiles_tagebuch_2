@@ -14,6 +14,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
+    //private String TAG = getLocalClassName();
 
     private DiaryDbHandler diaryDbHandler;
     private DiaryDbAdapter diaryDbAdapter;
@@ -34,31 +35,18 @@ public class MainActivity extends AppCompatActivity {
 
         entryListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long uid) {
 
-                //TODO:
-                //comment the following
-                Toast.makeText(MainActivity.this, "You clicked List Item with ID " + id,Toast.LENGTH_SHORT).show();
-
-                //Add activity Name & uncomment the following
-                /*
-                Intent i = new Intent(getApplicationContext(), ActivityName.class);
-                i.putExtra("id",diaryDbAdapter.getItemId(position)); //id);
+                Intent i = new Intent(getApplicationContext(), ViewEntry.class);
+                i.putExtra("_id", diaryDbAdapter.getItemId(position)); //id);
                 startActivity(i);
-                */
 
-                //Add code to new activity to get id
-                /*
                 Bundle extras = getIntent().getExtras();
                 if (extras != null) {
-                    long id = extras.getLong("id");
+                    long id = extras.getLong("_id");
                 }
-                */
             }
         });
-
-
-
 
         FloatingActionButton fab =  findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -66,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
-                startActivity(new Intent(view.getContext(), AddEntryActivity.class));
+                startActivity(new Intent(view.getContext(), EntryEdit.class));
             }
         });
     }
