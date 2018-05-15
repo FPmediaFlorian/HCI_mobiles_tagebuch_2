@@ -20,21 +20,22 @@
         android:clickable="false" />
 
 
-    <EditText
+    <TextView
         android:id="@+id/txt_titel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:clickable="false"
         android:ems="10"
         android:hint="Titel"
         android:inputType="textPersonName"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_image"
         android:longClickable="false"
-        android:clickable="false" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_image" />
 
-    <EditText
+    <TextView
         android:id="@+id/txt_text"
         android:layout_width="365dp"
         android:layout_height="309dp"
@@ -50,22 +51,24 @@
         android:longClickable="false"
         android:clickable="false" />
 
-    <EditText
+    <TextView
         android:id="@+id/txt_date"
-        android:layout_width="141dp"
-        android:layout_height="45dp"
+        android:layout_width="85dp"
+        android:layout_height="23dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:clickable="false"
         android:editable="false"
         android:ems="10"
         android:focusable="false"
         android:inputType="date"
+        android:longClickable="false"
         android:text="Date"
         android:textAlignment="viewEnd"
+        app:layout_constraintBottom_toTopOf="@+id/txt_text"
         app:layout_constraintStart_toEndOf="@+id/txt_titel"
         app:layout_constraintTop_toBottomOf="@+id/btn_image"
-        android:longClickable="false"
-        android:clickable="false" />
+        app:layout_constraintVertical_bias="0.0" />
     <android.support.design.widget.FloatingActionButton
         android:layout_width="60dp"
         android:layout_height="66dp"
@@ -91,5 +94,7 @@
         android:layout_marginBottom="16dp"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginStart="8dp" android:id="@+id/btn_delete"/>
+
+
 
 </android.support.constraint.ConstraintLayout>

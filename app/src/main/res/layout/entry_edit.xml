@@ -26,6 +26,7 @@
         android:ems="10"
         android:hint="Titel"
         android:inputType="textPersonName"
+        android:selectAllOnFocus="true"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_image" />
 
@@ -34,7 +35,7 @@
         android:layout_width="365dp"
         android:layout_height="309dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:ems="10"
         android:gravity="top"
         android:hint="Text"

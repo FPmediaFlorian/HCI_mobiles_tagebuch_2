@@ -208,10 +208,15 @@ public class DiaryDbHandler extends SQLiteOpenHelper {
     }
 
     public Cursor getEntry(long uuid){
-        String fetchRow = "select * from " + TABLE_NAME +" where " + _id + " = ' " + uuid + " ' ";
+        //tring fetchRow = "select * from " + TABLE_NAME +" where " + _id + " = " + uuid;
         SQLiteDatabase database = getReadableDatabase();
-        Cursor cursor = database.rawQuery(fetchRow, null);
-        return cursor;
+        //Log.d(TAG, "fetchRow content: " + fetchRow);
+        Log.d(TAG, "Database Size: " + database.getPageSize() + " DB Version: " + database.getVersion());
+        //return database.rawQuery(fetchRow, null);
+        Cursor c = database.query(TABLE_NAME, new String[]{"_id", "text", "title", "date", "imgLink"}, "_id = ?", new String[]{Long.toString(uuid)}, null, null, null);
+        c.moveToNext();
+        Log.d(TAG, "Cursortest: " + c.getString(c.getColumnIndex("text")));
+        return c;
     }
 
     public Cursor queryEntries(){

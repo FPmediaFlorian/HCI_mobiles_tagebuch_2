@@ -6,6 +6,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -33,6 +34,12 @@ public class MainActivity extends AppCompatActivity {
         entryListView.setAdapter(diaryDbAdapter);
         updateListView();
 
+        if(entryListView.getAdapter().getCount()==0){
+            Toast toast = Toast.makeText(getApplicationContext(),"Your diary is empty.\nAdd your first entry now.",Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.CENTER,0,0);
+            toast.show();
+        }
+
         entryListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long uid) {
@@ -40,11 +47,6 @@ public class MainActivity extends AppCompatActivity {
                 Intent i = new Intent(getApplicationContext(), ViewEntry.class);
                 i.putExtra("_id", diaryDbAdapter.getItemId(position)); //id);
                 startActivity(i);
-
-                Bundle extras = getIntent().getExtras();
-                if (extras != null) {
-                    long id = extras.getLong("_id");
-                }
             }
         });
 
@@ -52,8 +54,7 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+
                 startActivity(new Intent(view.getContext(), EntryEdit.class));
             }
         });
@@ -91,6 +92,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume(){
         super.onResume();
         updateListView();
+        if(entryListView.getAdapter().getCount()==0){
+            Toast toast = Toast.makeText(getApplicationContext(),"Your diary is empty.\nAdd your first entry now.",Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.CENTER,0,0);
+            toast.show();
+        }
+
     }
 
     @Override

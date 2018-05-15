@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -15,9 +16,7 @@ import android.widget.Toast;
 
 import java.util.Calendar;
 
-/**
- * Created by jakob on 13.05.2018.
- */
+
 
 public class EntryEdit extends AppCompatActivity {
 
@@ -40,7 +39,7 @@ public class EntryEdit extends AppCompatActivity {
         imageLink = Uri.parse("android.resource://com.mt2.meilenstein3.hci_mobiles_tagebuch_2/drawable/background_placeholder.png");
 
         if (extras != null) {
-            id = extras.getLong("id");
+            id = extras.getLong("_id");
             Cursor cursor = diaryDbHandler.getEntry(id);
             EditText titel = findViewById(R.id.txt_titel);
             EditText text = findViewById(R.id.txt_text);
@@ -54,6 +53,9 @@ public class EntryEdit extends AppCompatActivity {
             Uri imguri = Uri.parse(cursor.getString(cursor.getColumnIndex("imgLink")));
             img.setImageURI(imguri);
 
+
+
+
         }
         else id=-1;
 
@@ -65,13 +67,13 @@ public class EntryEdit extends AppCompatActivity {
                 EditText text = findViewById(R.id.txt_text);
                 EditText date = findViewById(R.id.txt_date);
                 if(id==-1)
-                    diaryDbHandler.insertEntry(titel.getText().toString(), text.getText().toString(), date.toString(),
+                    diaryDbHandler.insertEntry(titel.getText().toString(), text.getText().toString(), date.getText().toString(),
                             imageLink.toString(), 10);
                 else {
-                    diaryDbHandler.changeDate(id, date.toString());
+                    diaryDbHandler.changeDate(id, date.getText().toString());
                     diaryDbHandler.changeImgLink(id, imageLink.toString());
-                    diaryDbHandler.changeText(id, text.toString());
-                    diaryDbHandler.changeTitle(id, titel.toString());
+                    diaryDbHandler.changeText(id, text.getText().toString());
+                    diaryDbHandler.changeTitle(id, titel.getText().toString());
                 }
                 startActivity(new Intent(view.getContext(), MainActivity.class));
             }
@@ -83,6 +85,7 @@ public class EntryEdit extends AppCompatActivity {
             public void onClick(View view){
                 pickImage();
                 imgButton.setImageURI(imageLink);
+                imgButton.refreshDrawableState();
             }
         });
 
@@ -105,6 +108,12 @@ public class EntryEdit extends AppCompatActivity {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("image/*");
         startActivityForResult(intent, PICK_PHOTO);
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        //recreate();
     }
 }
 

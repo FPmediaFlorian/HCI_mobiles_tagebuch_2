@@ -2,6 +2,7 @@ package com.mt2.meilenstein3.hci_mobiles_tagebuch_2;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.drawable.Drawable;
 import android.support.constraint.ConstraintLayout;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -57,11 +58,15 @@ public class DiaryDbAdapter extends CursorAdapter {
         TextView textView = view.findViewById(R.id.txtStory);
         TextView dateView = view.findViewById(R.id.txtDate);
         ConstraintLayout layout = view.findViewById(R.id.constLayout);
-        //ImageView imgLinkView = view.findViewById(R.id.imgEntry);
+
 
         titleView.setText(titleContent);
         textView.setText(textContent);
         dateView.setText(dateContent);
+
+
+        if(imgLinkContent=="\\test") layout.setBackground(Drawable.createFromPath(imgLinkContent));
+
 
         //imgLinkView.setText(imgLinkContent);
         //imgLinkView.se
